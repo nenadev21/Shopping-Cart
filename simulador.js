@@ -72,9 +72,9 @@ function firstOrder() {
 
 function continueBuying() {
     let continueBuying = prompt(`Quieres seguir comprando?. Opciones: SI, NO, NO SE`)
-    if (continueBuying.toLowerCase() === "si") {
+    if (continueBuying.toLowerCase().trim() === "si") {
         firstOrder()
-    } else if (continueBuying.toLowerCase() === "no") {
+    } else if (continueBuying.toLowerCase().trim() === "no") {
         alert(`ingresa los datos de tu tarjeta y finaliza tu compra`)
     } else {
         alert(`sigue revisando nuestros productos, no hay apuro!`)
