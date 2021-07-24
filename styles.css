@@ -65,13 +65,14 @@ input[type="submit"] {
     border: 0;
     color: white;
     border-radius: 5px;
+    padding: 10px;
 }
 
 main {
     display: flex;
 }
 
-article {
+article, #cart-wrapper {
     display: flex; 
     flex-direction: column;
     align-items: center;
@@ -131,9 +132,9 @@ footer li {
      
   }
 
-  /* ADD TO KART BUTTON */
+  /* ADD TO CART BUTTON */
 
-.add-to-kart {
+.add-to-cart, .go-home, .submit-button {
     border: 1px solid #7FBC03;
     color: #7FBC03;
     background-color: transparent;
@@ -142,7 +143,7 @@ footer li {
     margin: 2rem 4rem;
   }
 
-  .add-to-kart:hover {
+  .add-to-cart:hover, .go-home:hover, .submkit-button:hover {
     color: #FFFFFF;
     border-color: #7FBC03;
     background: #7FBC03;
@@ -155,8 +156,18 @@ footer li {
     padding-bottom: 0px;
   }
 
+.fa-shopping-cart {
+  font-size: 5rem;
+  color: #7FBC03;
+}
 
+#cart-empty-action {
+margin-top: 0;  
+}
 
-
-
+#cart-wrapper {
+  border: 1px solid #E5E5E5;
+  margin: 20px;
+  padding: 20px;
+}
   

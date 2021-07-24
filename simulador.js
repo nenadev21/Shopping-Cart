@@ -1,3 +1,4 @@
+//PLACEHOLDER WITH AN ARRAY OF PRODUCTS
 products = [
     {
         id: 1,
@@ -57,9 +58,7 @@ products = [
     }
 ]
 
-
-
-
+//THIS FUNCTION HELPS FORMAT THE PRICE DISPLAYED
 
 const formatter = new Intl.NumberFormat('es-CL', {
     style: 'currency',
@@ -67,9 +66,7 @@ const formatter = new Intl.NumberFormat('es-CL', {
     minimumFractionDigits: 0
   })
 
-  const addToCart = () => {
-      alert('a product has been added to cart')
-  }
+//THIS FUNCTION MAP THE PRODUCT ARRAY AND DISPLAY THE LIST OF PRODUCTS IN THE HTML
 
 products.map((product, index) => {
     let displayProductList = document.querySelector("#all-products")
@@ -87,40 +84,37 @@ products.map((product, index) => {
     <option value="3">3</option>
     <option value="4">4</option>
     </select>
-    <button class="add-to-kart" onClick="addToCart"> Agregar al Carro </button>
+    <button class="add-to-cart" onClick="addToCart"> Agregar al Carro </button>
     </div>
     </div>`
 })
 
-// const updateCart = () => {
-// let selectedProductsList = document.querySelector("#section-cart")
-// selectedProductsList.innerHTML +=
-// `<div> 
-//     <p>display products here</p>
-// </div>`
-// }
 
+//THIS CREATE AN OBJECT WITH USER'S DELIVERY INFORMATION
 
-// function firstOrder() {
-//     let item = prompt(`que producto quieres comprar?`);
-//     let price = prompt(`cual es el precio del producto?`)
-//     let quantity = prompt(`cuantas unidades quieres llevar?`)
-//     let cost = price * quantity;
-//     alert(`tu total por ${quantity} unidades de ${item} es ${cost} CLP`)
-// }
-
-// function continueBuying() {
-//     let continueBuying = prompt(`Quieres seguir comprando?. Opciones: SI, NO, NO SE`)
-//     if (continueBuying.toLowerCase().trim() === "si") {
-//         firstOrder()
-//     } else if (continueBuying.toLowerCase().trim() === "no") {
-//         alert(`ingresa los datos de tu tarjeta y finaliza tu compra`)
-//     } else {
-//         alert(`sigue revisando nuestros productos, no hay apuro!`)
+// class DeliveryFields {
+//     constructor() {
+// this.clientName = "clientName"
+// this.address = "address"
+// this.pago = "pago"
 //     }
 // }
 
-// firstOrder();
-// continueBuying();
+// const delivery1 = new DeliveryFields()
+// const deliveryInfoArr = [];
+// const questions = ["Ingresa tu nombre", "Ingresa tu direccion", "Ingresa tu medio de pago"]
 
-//updated
+// //AQUI ME PIERDO - NO SE COMO USAR LA FUNCION CONSTRUCTORA PARA CREAR EL NUEVO OBJETO CON LAS KEYS CORRESPONDIENTES
+// for (let question of questions) {
+//     let responses = prompt(question)
+//     deliveryInfoArr.push(delivery1, responses)
+//     console.log(deliveryInfoArr)
+// }
+
+//THIS CHANGE THE "NUMBER" OF PRODUCTS DISPLAYED IN THE CART
+
+let cartTitle = document.getElementById("cart-title")
+let productQuantity = prompt('cuantos productos quieres agregar a tu carro?')
+cartTitle.innerHTML = `Muy bien! Tienes ${productQuantity} productos en tu carro de compras`
+
+

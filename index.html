@@ -7,6 +7,7 @@
     <meta name="description" content="Especialista en color. Haircontournig. Hairstrobing. Babyhighlights. Cortes hombre, mujer, niños. Alisados">
     <title>Carro Compras Hair Salon</title>
     <link rel="stylesheet" href="styles.css"> 
+    <script src="https://kit.fontawesome.com/222c4be5e5.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <nav> 
@@ -19,20 +20,22 @@
     <h1>Studio Victor Vera</h1>
     
 </nav>
-<main> 
-    <form id="product-form">
+<main id="search-bar"> 
+    <form id="search-form">
         <input id="product-input" type="input" placeholder="Busca en nuestra tienda">
-        <input type="submit" id="submit">
+        <input type="submit" id="submit"/>
     </form>
 </main>
 <section id="all-products" class="wrapper"> 
 </section>
-<section id="shopping-cart" class="wrapper"> 
-</section>
-    
-
-
-
+<div id="cart-wrapper" class="wrapper"> 
+    <h2 id="cart-title"> No tienes productos en tu carro de compras</h2>
+    <div id="cart-image"> 
+        <i class="fas fa-shopping-cart" width=300px></i> 
+    </div>
+    <p id="cart-empty-action">Puedes buscar productos o ir al inicio haciendo click en el botón.</p>
+    <button class="go-home">Ir al Inicio</button>
+</div>
 <footer> 
     <ul>
         <li><a href="#">Instagram</a></li>
