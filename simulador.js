@@ -1,37 +1,64 @@
 products = [
     {
         id: 1,
-        productName: "Tintura Evolution Alfaparf",
-        size: "60ml",
-        price: 13990, 
-        description: "Una fórmula de vanguardia enriquecida con ácido hialurónico y sin PPD.Potencia de elevación, hasta 3 niveles, una cobertura excepcional y longevidad del color, porcentaje baja de AMMONIA (máx. 1% durante la aplicación), NO PPD, para una fórmula menos sensibilizante, para el cuidado del cuero cabelludo, cabello único y extraordinario de cualidad y brillo.",
-        image: "https://images.jumpseller.com/store/palumbo-store/4157201/tintura-evolution2.jpg?1622243641"
+        productName: "Acondicionador All Soft Mega",
+        brand: "redken",
+        size: "250ml",
+        price: 24990, 
+        costOfShip: 500,
+        category: "acondicionador",
+        inStock: true,
+        membersDiscount: true,
+        reviewStars: 4.5,
+        description: "Suavidad Profunda. Nuevo All Soft Mega con Superfood Nutri-Complex, una mezcla de extracto de cactus, aloe vera y aceite de sacha inchi, ofrece una alimentación intensa y una reposición inmediata para el cabello severamente seco y grueso. La máxima suavidad en tan solo una ducha.",
+        image: "https://cdnx.jumpseller.com/palumbo-store/image/4100097/resize/200/200?1617494517"
     }, 
     {
         id: 2, 
         productName: "Shampoo Absolut Repair",
+        brand: "l'oreal professionnel",
         size: "300ml",
-        price: 12990,
+        price: 18990,
+        costOfShip: 500,
+        category: "shampoo",
+        inStock: true,
+        membersDiscount: true,
+        reviewStars: 3.5,
         description: "El Shampoo Absolut Repair Lipidium repara y fortalece las áreas más dañadas del cabello. El cabello queda instantáneamente reconstruido y transformado desde el interior. ", 
         image: "https://images.jumpseller.com/store/palumbo-store/2284726/2.jpg?1617493135"
     },
     {
         id: 3,
-        productName: "Serum Absolut Repair Puntas",
-        size: "50ml",
-        price: 18990,
-        description: "Con este sérum reconstructor profesional, tu cabello dañado luce suave y brillante al momento. Su fórmula no grasa facilita el styling aportando un tacto sedoso. ",
-        image: "https://images.jumpseller.com/store/palumbo-store/2284712/7003_SERUM_ABSOLUT_REPAIR_PUNTAS_50_ML.png?1622300054"
+        productName: "Máscara Absolut Repair",
+        brand: "l'oreal professionnel",
+        size: "250ml",
+        price: 26990,
+        costOfShip: 500,
+        category: "mascara",  
+        inStock: false,
+        membersDiscount: false,
+        reviewStars: 4.0,
+        description: "Potenciado con Quinoa dorada + proteína,  repara instantáneamente todo el cabello sin apelmazar. Su textura en gel, deja el cabello 7x más brillante y suave. Sin residuo en la fibra del cabello.",
+        image: "https://cdnx.jumpseller.com/palumbo-store/image/7564279/resize/200/200?1619653438"
     },
     {
         id: 4,
-        productName: "Serum Liss Control Plus", 
-        size: "50ml",
-        price: 15990, 
-        description: "Serum que controla el frizz hasta 24 hrs., con acabado suave y perfecto para cabello rizado, ondulado o rebelde",
-        image: "https://images.jumpseller.com/store/palumbo-store/2294957/7002_SERUM_LISS_CONTROL_%2B_50ML.png?1617493288"
+        productName: "Serum Cicaplasme Blond Absolu", 
+        brand: "kerastase",
+        size: "150ml",
+        price: 28990, 
+        costOfShip: 500,
+        category: "serum",
+        inStock: true,
+        membersDiscount: false,
+        reviewStars: 4.1,
+        description: "Trata instantáneamente las zonas dañadas de la fibra. Cicaplasme proporciona protección contra el calor hasta 230°C para proteger el cabello de las herramientas de peinado con calor. Consigue un cabello suave y luminoso.",
+        image: "https://cdnx.jumpseller.com/palumbo-store/image/6885303/resize/200/200?1619654030"
     }
 ]
+
+
+
 
 
 const formatter = new Intl.NumberFormat('es-CL', {
@@ -40,8 +67,12 @@ const formatter = new Intl.NumberFormat('es-CL', {
     minimumFractionDigits: 0
   })
 
+  const addToCart = () => {
+      alert('a product has been added to cart')
+  }
+
 products.map((product, index) => {
-    let displayProductList = document.querySelector("#section-products")
+    let displayProductList = document.querySelector("#all-products")
     displayProductList.innerHTML +=
     `<div class="card" id="card-border" key=${index}>
     <img src="${product.image}" alt="product-image" style="width:100%"/>
@@ -56,32 +87,40 @@ products.map((product, index) => {
     <option value="3">3</option>
     <option value="4">4</option>
     </select>
-    <button class="add-to-kart"> Agregar al Carro </button>
+    <button class="add-to-kart" onClick="addToCart"> Agregar al Carro </button>
     </div>
     </div>`
 })
 
+// const updateCart = () => {
+// let selectedProductsList = document.querySelector("#section-cart")
+// selectedProductsList.innerHTML +=
+// `<div> 
+//     <p>display products here</p>
+// </div>`
+// }
 
-function firstOrder() {
-    let item = prompt(`que producto quieres comprar?`);
-    let price = prompt(`cual es el precio del producto?`)
-    let quantity = prompt(`cuantas unidades quieres llevar?`)
-    let cost = price * quantity;
-    alert(`tu total por ${quantity} unidades de ${item} es ${cost} CLP`)
-}
 
-function continueBuying() {
-    let continueBuying = prompt(`Quieres seguir comprando?. Opciones: SI, NO, NO SE`)
-    if (continueBuying.toLowerCase().trim() === "si") {
-        firstOrder()
-    } else if (continueBuying.toLowerCase().trim() === "no") {
-        alert(`ingresa los datos de tu tarjeta y finaliza tu compra`)
-    } else {
-        alert(`sigue revisando nuestros productos, no hay apuro!`)
-    }
-}
+// function firstOrder() {
+//     let item = prompt(`que producto quieres comprar?`);
+//     let price = prompt(`cual es el precio del producto?`)
+//     let quantity = prompt(`cuantas unidades quieres llevar?`)
+//     let cost = price * quantity;
+//     alert(`tu total por ${quantity} unidades de ${item} es ${cost} CLP`)
+// }
 
-firstOrder();
-continueBuying();
+// function continueBuying() {
+//     let continueBuying = prompt(`Quieres seguir comprando?. Opciones: SI, NO, NO SE`)
+//     if (continueBuying.toLowerCase().trim() === "si") {
+//         firstOrder()
+//     } else if (continueBuying.toLowerCase().trim() === "no") {
+//         alert(`ingresa los datos de tu tarjeta y finaliza tu compra`)
+//     } else {
+//         alert(`sigue revisando nuestros productos, no hay apuro!`)
+//     }
+// }
+
+// firstOrder();
+// continueBuying();
 
 //updated
