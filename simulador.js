@@ -1,4 +1,6 @@
 //PLACEHOLDER WITH AN ARRAY OF PRODUCTS
+window.onload = () => {
+
 products = [
     {
         id: 1,
@@ -89,32 +91,53 @@ products.map((product, index) => {
     </div>`
 })
 
+// CONSTRUCTOR FUNCTION. THIS HELPS ME STORE INFORMATION IN AN OBJECT
 
-//THIS CREATE AN OBJECT WITH USER'S DELIVERY INFORMATION
+function DeliveryFields (clientName, clientAddress, paymentMethod) {
+this.clientName = clientName
+this.clientAddress = clientAddress
+this.paymentMethod = paymentMethod
+}
 
-// class DeliveryFields {
-//     constructor() {
-// this.clientName = "clientName"
-// this.address = "address"
-// this.pago = "pago"
-//     }
-// }
+// INSTANTIATION
 
-// const delivery1 = new DeliveryFields()
-// const deliveryInfoArr = [];
-// const questions = ["Ingresa tu nombre", "Ingresa tu direccion", "Ingresa tu medio de pago"]
+const collectInput = () => {
+let delivery1 = new DeliveryFields()
+//I don't understand what's line 105 for...Seems the code doesn't work if I remove it
+alert('Ahora completa los datos de tu envio')
+let clientName1 = prompt('Ingresa tu nombre')
+let clientAddress1 = prompt('Ingresa tu direccion completa')
+let paymentMethod1 = prompt('Ingresa tu medio de pago')
+let deliveryInfo = new DeliveryFields(clientName1, clientAddress1, paymentMethod1)
+return deliveryInfo
+}
 
-// //AQUI ME PIERDO - NO SE COMO USAR LA FUNCION CONSTRUCTORA PARA CREAR EL NUEVO OBJETO CON LAS KEYS CORRESPONDIENTES
-// for (let question of questions) {
-//     let responses = prompt(question)
-//     deliveryInfoArr.push(delivery1, responses)
-//     console.log(deliveryInfoArr)
-// }
-
-//THIS CHANGE THE "NUMBER" OF PRODUCTS DISPLAYED IN THE CART
-
+// THIS CHANGE THE "NUMBER" OF PRODUCTS DISPLAYED IN THE CART
+const updateCart = () => {
 let cartTitle = document.getElementById("cart-title")
-let productQuantity = prompt('cuantos productos quieres agregar a tu carro?')
-cartTitle.innerHTML = `Muy bien! Tienes ${productQuantity} productos en tu carro de compras`
+let productQuantity = prompt('Cuantos productos quieres agregar a tu carro?')
+cartTitle.innerHTML = `Muy bien! Agregaste <span class="product-quantity"> ${productQuantity} </span> productos a tu carro de compras`
+}
 
+//THIS DISPLAY THE DELIVERY DETAILS ON THE SCREEN
+const showDeliveryDetails = () => {
+let input = collectInput()
+let deliveryDetails = document.getElementById("shipping-details-confirmed")
+deliveryDetails.innerHTML +=
+`<div> 
+<h2>Revisa los detalles de tu envio</h2>
+<ul> 
+<li><strong>Nombre:</strong><span>${input.clientName}</span></li>
+<li><strong>Direccion:</strong><span>${input.clientAddress}</span></li>
+<li><strong>Metodo de Pago:</strong><span>${input.paymentMethod}</span></li>
+</ul>
+</div>`
+}
 
+updateCart()
+showDeliveryDetails()
+    update()
+    show()
+}
+
+runFunctions()
