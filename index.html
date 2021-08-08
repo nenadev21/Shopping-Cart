@@ -6,36 +6,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Especialista en color. Haircontournig. Hairstrobing. Babyhighlights. Cortes hombre, mujer, niños. Alisados">
     <title>Carro Compras Hair Salon</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css"> 
     <script src="https://kit.fontawesome.com/222c4be5e5.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<nav> 
-    <ul>
-        <li><a href="#">Equipo</a></li>
-        <li><a href="#">Servicios</a></li>
-        <li><a href="#">Productos</a></li>
-        <li><a href="#">Agendamiento</a></li>
-    </ul>
-    <h1>Studio Victor Vera</h1>
-    
-</nav>
+
+<!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Studio Victor Vera</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Equipo</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="#">Servicios</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="#">Productos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="#">Agendamiento</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+<!-- SEARCH BAR -->
 <main id="search-bar"> 
     <form id="search-form">
         <input id="product-input" type="input" placeholder="Busca en nuestra tienda">
         <input type="submit" id="submit"/>
     </form>
 </main>
+
+<!-- PRODUCT LIST FROM JSON OBJECT AND JS -->
 <section id="all-products" class="wrapper"> 
 </section>
+
+<!-- CART DISPLAY. IT UPDATES AFTER USER ADDS PRODUCTS -->
 <div id="cart-wrapper" class="wrapper"> 
-    <h2 id="cart-title"> No tienes productos en tu carro de compras</h2>
+    <h2 id="cart-title"> Productos en tu carro de compras</h2>
     <div id="cart-image"> 
         <i class="fas fa-shopping-cart" width=300px></i> 
     </div>
-    <p id="cart-empty-action">Puedes buscar productos o ir al inicio haciendo click en el botón.</p>
+    <p id="products-added-to-cart"></p>
     <button class="go-home">Ir al Inicio</button>
 </div>
+
+<!-- SHIPPING DETAILS. FORM TO REQUEST USER TO INPUT SHIPPING DETAILS -->
 <div id="shipping-details"> 
     <h2>Envio y Facturacion</h2>
     <form id="shipping-form"> 
@@ -43,15 +68,17 @@
             <label for="name">Ingresa tu nombre</label>
             <input type="text" name="name" id="name"/> 
             <label for="direccion">Ingresa tu direccion</label>
-            <input type="text" name="address" id="direccion"/> 
+            <input type="text" name="address" id="address"/> 
             <label for="pago">Ingresa tu medio de pago</label>
-            <input type="text" name="pago" id="pago"/> 
-            <button type="submit">Confirmar</button>
+            <input type="text" name="pago" id="payment"/> 
+            <button type="submit" id="btn-delivery-details">Confirmar</button>
         </div>
     </form>
     <div id="shipping-details-confirmed">
     </div>
 </div>
+
+<!-- FOOTER. IT INDICATES SOCIAL MEDIA INFO. IT SHOULD DISPLAY THE SAME TABS THAN ABOVE FOR EASY ACCESS -->
 <footer> 
     <ul>
         <li><a href="#">Instagram</a></li>
@@ -60,5 +87,8 @@
     </ul>
 </footer>
     <script src="simulador.js"> </script>
+    <!-- IMPORT JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 </body>
 </html>
