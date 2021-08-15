@@ -284,3 +284,10 @@ row col {
 #cart-product-image {
   max-width: 80px;
 }
+
+#cart-list {
+  border: 1px solid #0F0F0F;
+  border-radius: 15px;
+  padding: 20px;
+  margin: 20px;
+}
