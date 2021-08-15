@@ -1,25 +1,3 @@
-// let serviceType = [{"id ":1,"category":"Peluquería","serviceName":"Alisado Brasil Cacau","description":"Tratamiento de alisado con brasil cacau","StartingPrice":55000,"duration":90},
-// {"id ":2,"category":"Peluquería","serviceName":"Alisado Chocolate","description":"Tratamiento de alisado con producto alternativo a base de chocolate","StartingPrice":48000,"duration":90},
-// {"id ":3,"category":"Peluquería","serviceName":"Alisado Coffee","description":"Tratamiento de alisado con producto alternativo a base de cafe","StartingPrice":48000,"duration":90},
-// {"id ":4,"category":"Peluquería","serviceName":"Alisado Keratina","description":"Tratamiento de alisado con keratina","StartingPrice":54000,"duration":90},
-// {"id ":5,"category":"Peluquería","serviceName":"Alisado Keratina Hidrolizada","description":"Tratamiento de alisado con producto alternativo a base de keratina hidrolizada","StartingPrice":48000,"duration":30},
-// {"id ":6,"category":"Peluquería","serviceName":"Hidratacion Suave","description":"Tratamiento de hidratacion con cremas capilares","StartingPrice":12000,"duration":30},
-// {"id ":7,"category":"Peluquería","serviceName":"Babylights","description":"Técnica que aporta luz al cabello de manera sutil intentando imitar el reflejo natural de los bebés en el cabello.","StartingPrice":42000,"duration":180},
-// {"id ":8,"category":"Peluquería","serviceName":"Balayage ","description":"Barrido en el cabello para obtener un degradé natural","StartingPrice":60000,"duration":180},
-// {"id ":9,"category":"Peluquería","serviceName":"Corte Mujer","description":"Corte de acuerdo a rostro","StartingPrice":18000,"duration":60},
-// {"id ":10,"category":"Peluquería","serviceName":"Corte Hombre","description":"Corte de acuerdo a rostro","StartingPrice":12000,"duration":30},
-// {"id ":11,"category":"Peluquería","serviceName":"Corte Infantil","description":"Corte de acuerdo a rostro","StartingPrice":10000,"duration":45},
-// {"id ":12,"category":"Peluquería","serviceName":"Highlights","description":"Técnica que aporta luz al cabello a través del Visajismo.","StartingPrice":55000,"duration":180},
-// {"id ":13,"category":"Peluquería","serviceName":"Olaplex","description":"Reparación y restauración de enlaces de disulfuro por procesos químicos","StartingPrice":48000,"duration":45},
-// {"id ":14,"category":"Peluquería","serviceName":"Plasma","description":"Hidratación profunda a nivel de cortéx","StartingPrice":25000,"duration":25},
-// {"id ":15,"category":"Peluquería","serviceName":"Tintura","description":"Tintura global sin amoniaco o tintura especial","StartingPrice":42000,"duration":60},
-// {"id ":16,"category":"Peluquería","serviceName":"Tintura de Crecimiento","description":"Mantencion de Color","StartingPrice":25000,"duration":60},
-// {"id ":17,"category":"Peluquería","serviceName":"Ondas al Agua","description":"Peinado con pinzas o tenazas, ondas naturales","StartingPrice":25000,"duration":30},
-// {"id ":18,"category":"Rostro ","serviceName":"Maquillaje","description":"Maquillaje de fiesta u ocasion especial","StartingPrice":30000,"duration":60},
-// {"id ":19,"category":"Rostro ","serviceName":"Maquillaje Novia","description":"Maquillaje de novia","StartingPrice":80000,"duration":120},
-// {"id ":20,"category":"Rostro ","serviceName":"Facial Anti Age","description":"Procedimiento no quirúrgico que combate las arrugas y mejoran la apariencia de la piel del rostro ","StartingPrice":35000,"duration":90},
-// {"id ":21,"category":"Rostro ","serviceName":"Facial Anti Stress","description":"Procedimiento de limpieza y exfoliacion","StartingPrice":15000,"duration":60}]
-
 //DB WITH AN ARRAY OF PRODUCTS
 let allProducts = [{"id":1,"productName":"Acondicionador All Soft Mega","brand":"redken","size":"250ml","price":24990,"costOfShip":500,"category":"acondicionador","inStock":"TRUE","membersDiscount":"TRUE","reviewStars":4.5,"description":"Suavidad Profunda. Nuevo All Soft Mega con Superfood Nutri-Complex, una mezcla de extracto de cactus, aloe vera y aceite de sacha inchi, ofrece una alimentación intensa y una reposición inmediata para el cabello severamente seco y grueso. La máxima suavidad en tan solo una ducha.","image":"https://cdnx.jumpseller.com/palumbo-store/image/4100097/resize/200/200?1617494517"},
 {"id":2,"productName":"Shampoo Absolut Repair","brand":"l'oreal professionnel","size":"300ml","price":18990,"costOfShip":700,"category":"shampoo","inStock":"FALSE","membersDiscount":"FALSE","reviewStars":3,"description":"El Shampoo Absolut Repair Lipidium repara y fortalece las áreas más dañadas del cabello. El cabello queda instantáneamente reconstruido y transformado desde el interior.","image":"https://images.jumpseller.com/store/palumbo-store/2284726/2.jpg?1617493135"},
@@ -34,9 +12,8 @@ const formatter = new Intl.NumberFormat('es-CL', {
   })
 
 //THIS FUNCTION MAP THE PRODUCT ARRAY AND DISPLAY THE LIST OF PRODUCTS IN THE HTML FILE
-let productList = document.getElementById("all-products")
-allProducts.map((product, index) => {
-    productList.innerHTML +=
+
+$('#all-products').append(allProducts.map((product, index) => 
     `<div class="product-wrapper" id="card-border" key={index}>
     <div class="img-border">
       <img id="product-image" src=${product.image} alt="product-image"/>
@@ -59,8 +36,9 @@ allProducts.map((product, index) => {
       <button class="add-to-cart" id="addToCart-btn" onclick="verIdProductSelected(${index})"> Agregar al Carro </button>
       </div>
   </div>`
-})
+))
 
+//THIS FUNCTION GETS THE INFO FROM A SELECTED PRODUCT. IT TAKES WHAT'S IN THE INDEX WHICH IS LINKED TO THE BUTTON AND THEN SEARCH THE ARRAY OF PRODUCTS 
 const displayCart = document.getElementById('display-cart-screen')
 
 const verIdProductSelected = (key) => {
@@ -75,14 +53,14 @@ const verIdProductSelected = (key) => {
   addToCart(productName, productImage, productPrice, displayCart)
   
 } 
-
-
-
+//THIS FUNCTION TAKES THE DATA FROM THE PRODUCT SELECTED AND DISPLAYS IT ON THE SCREEN
+//I will need to write a function to save selected products in storage
+//I will need to make buttons to change quantity and remove products from cart
 
 const addToCart = (product, image, price, element3) => {
   let productListSoFar = document.createElement('div')
   productListSoFar.innerHTML = 
-  `<div>
+  `<div id="card-border">
   <h2>Tienes<span> x </span>productos en tu carrito</h2>
   <div class="container" id="cart-list">
     <div class="row align-items-center">
@@ -93,7 +71,7 @@ const addToCart = (product, image, price, element3) => {
         ${product}
       </div>
       <div class="col">
-        Unidades
+        Unidades TODO
       </div>
       <div class="col">
         ${price}
@@ -106,74 +84,85 @@ element3.append(productListSoFar)
 }
 displayCart.addEventListener('change', addToCart)
 
-//THIS DISPLAY WHAT'S IN THE SHOPPING CART ON THE NAV BAR
-//I WANT TO DISPLAY A PAGE WITH THE PRODUCTOS IN THE CART
-// const navShoppingCart = document.getElementById('nav-shopping-cart');
-// navShoppingCart.onclick = (productListSoFar) => {
-//   let sideBar = document.getElementById('cart-display')
-//   sideBar.innerHTML = `<div>${productListSoFar}</div>`
+//THIS TAKES WHAT AN USER HAS SELECTED ON THE PRODUCT LIST 
+//IT GAVE ME AN ERROR AFTER ADDING JQUERY. ALSO IT DOESN'T LET ME GET THE UNITS FOR EACH PRODUCT ONLY FOR THE FIRST ONE. WHY?
+
+// const btnAddProductQuantity = document.querySelector('.productQuantity')
+// btnAddProductQuantity.addEventListener('change', handleQuantityEvent)
+// let quantitySelected = document.getElementById('products-added-to-cart')
+
+// function handleQuantityEvent(e) {
+// let quantity = e.target.value
+// displayQuantity(quantity, quantitySelected)
 // }
 
-
-//THIS TAKES WHAT AN USER HAS SELECTED ON THE PRODUCT LIST 
-
-const btnAddProductQuantity = document.querySelector('.productQuantity')
-btnAddProductQuantity.addEventListener('change', handleQuantityEvent)
-let quantitySelected = document.getElementById('products-added-to-cart')
-
-function handleQuantityEvent(e) {
-let quantity = e.target.value
-displayQuantity(quantity, quantitySelected)
-}
-
-function displayQuantity(quantity, element) {
-    const quantityDisplay = document.createElement('div')
-    quantityDisplay.innerHTML = `<div> Seleccionaste ${quantity} unidades </div>`
-    element.append(quantityDisplay)
-}
+// function displayQuantity(quantity, element) {
+//     const quantityDisplay = document.createElement('div')
+//     quantityDisplay.innerHTML = `<div> Seleccionaste ${quantity} unidades </div>`
+//     element.append(quantityDisplay)
+// }
 
 //SHIPPING DETAILS SECTION
 //FUNCTION THAT CREATES A BANNER WITH SHIPPING DETAILS. USER CAN VERIFY DETAILS BEFORE CONFIRMING 
-//PENDING: I NEED TO SAVE INFO IN LOCAL STORAGE AND I NEED TO MAKE IT DISPLAY ONLY ONE CARD. DO NOT CREATE A SEPARATE CARD FOR EACH INPUT
-const shippingForm = document.getElementById('shipping-form')
+
 const buyerName = document.getElementById('buyer-name')
 const buyerAddress = document.getElementById('address')
 const buyerPayment = document.getElementById('payment')
 const buyerCard = document.getElementById('card-number')
-const shipDetails = document.getElementById('shipping-details-confirmed')
-shippingForm.addEventListener('submit', handleFormSubmit);
+const submitOrder = document.getElementById('btn-delivery-details') //this triggers the flow
+const shipDetails = document.getElementById('shipping-details-confirmed') //where info will be displayed
 
-function handleFormSubmit(e) {
+submitOrder.addEventListener('click', addDataLocalStorage);
+let arr = new Array();
+
+function addDataLocalStorage(e) {
     e.preventDefault()
-    let buyerNameValue = buyerName.value
-    let buyerAddressValue = buyerAddress.value
-    let buyerPaymentValue = buyerPayment.value
-    let buyerCardValue = buyerCard.value
-
-    displayDeliveryDetails(buyerNameValue, buyerAddressValue, buyerPaymentValue, buyerCardValue, shipDetails)
-
+    deleteData()
+    getData()
+    arr.push({
+      buyerName: buyerName.value,
+      buyerAddress: buyerAddress.value,
+      buyerPayment: buyerPayment.value,
+      buyerCard: buyerCard.value
+    })
+   localStorage.setItem("localData", JSON.stringify(arr))
+   
     }
+    function getData(){
+      let str = localStorage.getItem("localData");
+      if (str!= null)
+          arr = JSON.parse(str);
+  }
+  
+  function deleteData(){
+  localStorage.clear();
+  }
 
 //THIS DISPLAY THE DELIVERY DETAILS ON THE SCREEN
-const displayDeliveryDetails = (user, address, payment, cardNumber, element2) => {
-const card = document.createElement('div')
-card.innerHTML =
-`<div class="ship-WITH summary"> 
+
+const displayData = () => {
+  let arr1 = new Array();
+  arr1 = JSON.parse(localStorage.getItem("localData"));
+
+  let destiny= document.getElementById('shipping-details-confirmed');
+console.log(arr1)
+  for(i = 0; i < arr1.length; i++){
+destiny.innerHTML += `<div class="shipping-summary"> 
 <h2>Revisa los detalles de tu envio</h2>
 <ul> 
-<li><strong>Nombre:</strong><span>${user}</span></li>
-<li><strong>Direccion:</strong><span>${address}</span></li>
-<li><strong>Medio de Pago:</strong><span>${payment}</span></li>
-<li><strong>Numero de Tarjeta:</strong><span>${cardNumber}</span></li>
+<li><strong>Nombre:</strong><span>${arr1[i].buyerName}</span></li>
+<li><strong>Direccion:</strong><span>${arr1[i].buyerAddress}</span></li>
+<li><strong>Medio de Pago:</strong><span>${arr1[i].buyerPayment}</span></li>
+<li><strong>Numero de Tarjeta:</strong><span>${arr1[i].buyerCard}</span></li>
 </ul>
 </div>`
-
-element2.append(card);
 }
-
+}
+const verifyOrderBtn = document.getElementById('check-order-btn')
+verifyOrderBtn.addEventListener('click', displayData)
+        
 //RESERVATION SECTION
 //FUNCTION THAT DISPLAY A TEMPLATE TO MAKE RESERVATION AFTER USER HAS CLICK A BUTTON ON THE NAV BAR OR PAGE
-
 
 const reservationBtn = document.getElementById('reservationBtn')
 reservationBtn.addEventListener('click', displayReservationForm);   
