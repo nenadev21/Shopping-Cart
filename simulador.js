@@ -120,7 +120,7 @@ function addDataLocalStorage(e) {
     deleteData()
     getData()
     arr.push({
-      buyerName: buyerName.value,
+      buyerName: buyerName.value, //this could be done with a constructor as well
       buyerAddress: buyerAddress.value,
       buyerPayment: buyerPayment.value,
       buyerCard: buyerCard.value
