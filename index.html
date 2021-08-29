@@ -9,85 +9,40 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css"> 
     <script src="https://kit.fontawesome.com/222c4be5e5.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300&display=swap" rel="stylesheet">
 </head>
 <body>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> 
   <!-- I had to move the jquery script here, otherwise it gives me error "$ not recognized" -->
 
-<!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid" id="nav-container">
-          <a class="navbar-brand" href="#">Studio Victor Vera</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Equipo</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" href="#">Servicios</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" href="#">Tienda</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" href="#">Reserva Tu Hora</a>
-              </li>
-              <li>
-                <a class="nav-link active" href="#">Carrito</a>
-                <span id="nav-shopping-cart">
-                  <i class="fas fa-shopping-cart" id="nav-shopping-cart-img"></i> 
-                  <span class="badge rounded-pill bg-danger position-absolute top-50 start-40" >1</span>
-                </span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-<section>
-  <aside id="cart-display"></aside>
-</section>
+<div id="landing-page">
+  <img id="landing-page-img" src="assets/front-page2.jpg">
+</div>
 <!-- THE TEAM - IMPROVE COPY. SEE HOW CAN I MOVE THIS TO THE JS FILE AND LOOP OVER INFO  -->
-<section id="team-carrusel">
-  <h2>Conoce al Equipo</h2>
-  <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+<section>
+  <h2 class="section-title">Conoce al Equipo</h2>
+  <div class="row">
+    <div class="column">
+      <img src="assets/desk.jpg">
     </div>
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="./assets/67168503_500989443999959_4772687309232599992_n.jpg" class="d-block w-100" alt="victor-vera">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Ama lo que haces</h5>
-          <p>Cada color es una obra de arte</p>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="./assets/68933815_517188382157640_7860706640121760300_n.jpg" class="d-block w-100" alt="victor-vera">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Risas y conversaciones inolvidables</h5>
-          <p>Pasa un momento agradable</p>
-        </div>
-      </div>
+    <div class="column">
+      <img src="assets/park.jpg">
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
+    <div class="column">
+      <img src="assets/room.jpg">
+    </div>
+    <div class="column">
+      <img src="assets/window.jpg">
+    </div>
   </div>
-</section>
+    <p id="team-intro">Somos Victor, Marcelo y nuestras mascotas Lukas y Ben Fleck. El 2020, abrimos nuestro propio salon, luego de haber trabajado por más de una década en reconocidos salones donde aprendimos técnicas avanzadas de corte y color. Hacemos lo imposible porque nuestros usuarios vivan una experiencia única y que se vayan felices con el resultado de nuestro trabajo. Hemos crecido gracias a las recomendaciones de todos nuestos clientes y clientas que avalan nuestro trabajo. Te invitamos a reservar tu hora con nosotros!</p>
+</section>  
 
 <!-- SERVICIOS -->
 <section id="available-services">
-  <h2>Nuestros Servicios</h2>
+  <h2 class="section-title">Descubre lo que Hacemos</h2>
   <div class="container px-4">
     <div class="row gx-5">
       <div class="col">
@@ -127,7 +82,7 @@
 
 <!-- SHOP -->
 <section> 
-  <h2>Compra en la Tienda</h2>
+  <h2 class="section-title">Compra en la Tienda</h2>
   <p>Aqui quiero tener la opcion de usar filtros y sorting en la base de datos de los productos</p>
   <!-- SEARCH BAR -->
 <main id="search-bar"> 
@@ -172,8 +127,10 @@ SHOPPING CART TO DATE -->
     <input type="submit" id="btn-delivery-details"/>
 </form>
 <button id="check-order-btn" class="btn btn-lg btn-outline-danger">Revisa tu compra</button>
-<div id="shipping-details-confirmed"></div>
+<div id="shipping-confirmation"></div>
 </section>
+
+<button id="btn1">trigger modal</button>
 
 <!-- referencia: https://lemoustache.agendapro.com/cl/workflow?local=1058 -->
 
