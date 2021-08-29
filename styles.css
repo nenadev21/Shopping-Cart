@@ -5,12 +5,12 @@ html, body {
 
 html {
     font-size: 14px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 body {
-    width: 90%;
     margin: 0 auto;
+    font-family: 'Cairo', sans-serif;
+    font-weight: normal;
 }
 
 nav, footer {
@@ -91,6 +91,12 @@ footer li {
     text-align: center;
     flex: 1;
     margin: 10px;
+}
+
+.section-title {
+  font-size: 30px;
+  font-weight: 900;
+  margin: 30px 0 30px 0;
 }
 /* CARD STYLES */
 .product-wrapper {
@@ -237,12 +243,37 @@ h4 {
     color: #0F0F0F;
 }
 
-#team-carrusel {
-  padding: 3px;
-  width:  100%;
-  height: 100%;
-  object-fit: cover;
-  margin: 20px;
+/* LANDING PAGE */
+#landing-page-img {
+  width: 100%;
+}
+
+/* THE TEAM */
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+/* Create four equal columns that sits next to each other */
+.column {
+  flex: 25%;
+  max-width: 25%;
+  padding: 0 4px;
+}
+
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+  height: 310px;
+}
+
+#team-intro {
+  margin: 20px 0;
+  font-size: 19px;
+  text-align: center;
 }
 
 /* DELIVERY DETAILS */
@@ -256,9 +287,6 @@ h4 {
 }
 
 /* SERVICES STYLES */
-#available-services {
-  margin: 20px;
-}
 
 #test {
   padding: 10px;
