@@ -30,6 +30,7 @@ let coverNav = `<div class="cover-img">
 </div>
 </nav>
 <button id="more-info-btn" type="button" class="btn btn-dark">Quiero Reservar Mi Hora</button>
+<a id="nav-fixed-whatsapp" href="https://wa.me/56942072788?text=Mandanos%20un%20mensaje%20y%20te%20responderemos%20a%20la%20brevedad"><i class="fab fa-whatsapp fa-2x" style="color: white"></i></a>
 </img>
 </div>`
 $('#navigation').append(coverNav);
@@ -233,72 +234,141 @@ allProducts.map((product, index) => {
         <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
       </div>
     <label for="quantity">Cantidad:</label>
-    <select name="quantity" class="productQuantity">
-    <option value="1">1</option>
-    <option value="2">2</option> 
-    <option value="3">3</option>   
-    <option value="4">4</option>
+    <select name="quantity" class="productQuantity" id='product-quantity'>
+    <option value=${product.inCart}>1</option>
+    <option value=${product.inCart}>2</option>
+    <option value=${product.inCart}>3</option>
+    <option value=${product.inCart}>4</option>
     </select>
-    <button class="add-to-cart" id="listBtn-${product.id}" data-id='${product.id}' value="${product.id}"> Agregar al Carro</button>
+    <button class="add-to-cart" id="listBtn-${product.id}" value="${product.id}"> Agregar al Carro</button>
     </div>
 </div>`)
 })
 
 $('.add-to-cart').on('click', (e) => {
   let selectedProductId = e.target.value
-  let productInCart = allProducts.find(p => p.id === parseInt(selectedProductId))
-
-  console.log(selectedProductId)
-  console.log(productInCart)
-
-setCartItems(productInCart)
+  let product = allProducts.find(p => p.id === parseInt(selectedProductId))
+  setCartNumbers(product)
+  totalCost(product)
 })
 
+// $('#product-quantity').on('click', (e) => {
+//   let selectedQuantity = e.target.value
+//   console.log(selectedQuantity)
+//   setCartNumbers(product)
+// })
+
 const cartNumbersOnLoad = () => {
-  let numberOfProducts = localStorage.getItem('cartItems')
+  let numberOfProducts = localStorage.getItem('cartNumbers')
   if(numberOfProducts) {
     $('#nav-product-number').text(numberOfProducts)
   }
 }
 
-const setCartNumbers = (productInCart) => {
-  let numberOfProducts = localStorage.getItem('cartItems')
+const setCartNumbers = (product) => {
+  let numberOfProducts = localStorage.getItem('cartNumbers')
   numberOfProducts = parseInt(numberOfProducts)
   if (numberOfProducts) {
-    localStorage.setItem('cartItems', numberOfProducts + 1)
+    localStorage.setItem('cartNumbers', numberOfProducts + 1)
     $('#nav-product-number').text(numberOfProducts + 1)
   } else {
-    localStorage.setItem('cartItems', 1)
+    localStorage.setItem('cartNumbers', 1)
     $('#nav-product-number').text(numberOfProducts)
   }
-  setCartItems(productInCart)
+  setCartItems(product)
 }
 
-const setCartItems = (productInCart) => {
-  let cartItems = localStorage.getItem('productStoredInCart')
-  cartItems = JSON.parse(cartItems)
-  console.log('inside setproduct items', productInCart)
+const setCartItems = (product) => {
+  let inCartItems = localStorage.getItem('productsInCart')
+  inCartItems = JSON.parse(inCartItems)
+  console.log('items local storage', inCartItems)
+  if(inCartItems !== null) {
+    if(inCartItems[product.tag] == undefined) {
+      inCartItems = {
+        ...inCartItems,
+        [product.tag]: product
+      }
+    }
+    inCartItems[product.tag].inCart += 1;
+  } else {
+    product.inCart = 1
+    inCartItems = {
+      [product.tag]: product
+    }
+  }
+  localStorage.setItem('productsInCart', JSON.stringify(inCartItems))
+}
+
+const totalCost = (product) => {
+let cartCost = localStorage.getItem('totalCost')
+if(cartCost != null) {
+  cartCost = JSON.parse(cartCost)
+  localStorage.setItem('totalCost', cartCost + product.price)
+} else {
+  localStorage.setItem('totalCost', product.price)
+}
+}
+
+const displayCart = () => {
+let cartItems = localStorage.getItem('productsInCart')
+let totalCost = localStorage.getItem('totalCost')
+let cartNumbers = localStorage.getItem('cartNumbers')
+cartItems = JSON.parse(cartItems, totalCost, cartNumbers)
+
+console.log(cartItems, totalCost, cartNumbers)
+
+$('#cart-displayed').prepend(`<h2>Tienes <span>${cartNumbers}</span> productos en tu carrito</h2>`)
+
+Object.values(cartItems).map((product, index) => {
+$('#cart-displayed').append(`<div index=${index}>
+<div class="container" id="cart-list">
+  <div class="row align-items-center">
+    <div class="col">
+      <img id="cart-product-image" src=${product.image}> </img>
+    </div>
+    <div class="col">
+      ${product.productName}
+    </div>
+    <div class="col">
+      ${product.inCart}
+    </div>
+    <div class="col">
+    ${formatter.format(product.price)}
+    </div>
+    <div class="col">
+    <i class="fas fa-trash-alt"></i>
+    </div>
+  </div>
+</div>
+</div>`)
+})
+$('#cart-displayed').append(`<div>
+<div class="container" id="cart-list">
+  <div class="row align-items-center">
+    <div class="col">
+    </div>
+    <div class="col">
+      TOTALES
+    </div>
+    <div class="col">
+      ${cartNumbers}
+    </div>
+    <div class="col">
+    ${formatter.format(totalCost)}
+    </div>
+    <div class="col">
+    </div>
+  </div>
+</div>
+</div>`)
 }
 
 cartNumbersOnLoad()
+displayCart()
 
-
-
-
-
-
-
-
-
-
-// function getButtonsId() {
-//   const buttons = [...document.querySelectorAll('.add-to-cart')]
-//   buttons.forEach(button => {
-//     let btnId = button.dataset.id
-//     console.log(btnId)
-//   })
-// }
-// getButtonsId()
+// $('#cart-navBar').on('click', displayCart() {
+// $()
+// })
 
 
 
@@ -315,32 +385,20 @@ cartNumbersOnLoad()
 
 
 
-//Function that takes selected product and displays it on the screen
-// const addToCart = (product, image, price, element3) => {
-//   let productListSoFar = document.createElement('div')
-//   productListSoFar.innerHTML = 
-//   `<div id="card-border">
-//   <h2>Tienes<span> x </span>productos en tu carrito</h2>
-//   <div class="container" id="cart-list">
-//     <div class="row align-items-center">
-//       <div class="col">
-//         <img id="cart-product-image" src=${image}> </img>
-//       </div>
-//       <div class="col">
-//         ${product}
-//       </div>
-//       <div class="col">
-//         Unidades TODO
-//       </div>
-//       <div class="col">
-//         ${price}
-//       </div>
-//     </div>
-//   </div>
-// </div>`
-// element3.append(productListSoFar)
 
-// }
+
+
+
+
+
+
+
+
+
+
+
+
+
 // displayCart.on('change', addToCart)
 
 //Function that creates a element with shipping details
