@@ -11,19 +11,19 @@ let coverNav = `<div class="cover-img">
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a id="the-team-navBar"class="nav-link active" aria-current="page" href="#">Equipo</a>
+        <a id="team-navBar"class="nav-link active" aria-current="page" href="#">Equipo</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" href="#">Servicios</a>
+        <a id="services-navBar" class="nav-link active" href="#">Servicios</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" href="#">Tienda</a>
+        <a id="store-navBar" class="nav-link active" href="#">Tienda</a>
       </li>
       <li class="nav-item">
-        <a id="make-reservation" class="nav-link active" href="#">Reserva Tu Hora</a>
+        <a id="reservation-navBar" class="nav-link active" href="#">Reserva Tu Hora</a>
       </li>
       <li>
-      <a class="nav-link active d-flex justify-content-center" href="#"><i class="fas fa-shopping-cart fa-lg"></i></a>  
+      <a id="cart-navBar" class="nav-link active d-flex justify-content-center" href="#"><i class="fas fa-shopping-cart fa-lg"></i><span id="nav-product-number"></span></a>  
       </li>
     </ul>
   </div>
@@ -34,19 +34,40 @@ let coverNav = `<div class="cover-img">
 </div>`
 $('#navigation').append(coverNav);
 
+//NavBar Animations - It makes the user go to the target topic upon click of each tab
+const navbarTopics = ['team', 'services', 'store', 'reservation', 'cart']
+
+
+$("#team-navBar").on('click', function() {
+  $("html, body").animate({
+      scrollTop: $("#section-team").offset().top
+  }, 100);
+});
+
+$("#services-navBar").on('click', function() {
+  $("html, body").animate({
+      scrollTop: $("#section-services").offset().top
+  }, 100);
+});
+
+$("#store-navBar").on('click', function() {
+  $("html, body").animate({
+      scrollTop: $("#section-store").offset().top
+  }, 100);
+});
+
+$("#reservation-navBar").on('click', function() {
+  $("html, body").animate({
+      scrollTop: $("#section-reservation").offset().top
+  }, 100);
+});
+
 //The team - images grid
 
 let salonImages = imagenes;
 salonImages.map((image, index) => {
 $('.photos').append(`<img class="photos-salon" src=${image.src}>`);
 })
-// $('#the-team-navBar').click(function(e){
-//   e.preventDefault();
-
-//   $('html, body').animate({
-//     scrollTop: $('#secction-team-title').offset().top
-//   }, 2000);
-// });
 
 //Services explained
 let cutServiceDescription = `<ul>
@@ -195,8 +216,11 @@ const formatter = new Intl.NumberFormat('es-CL', {
   })
 
 //Function that maps the product list and then displays them in cards
+const cart = []
+let numberOfProducts = 0;
+
 allProducts.map((product, index) => {
-  $('#all-products').append(`<div class="product-wrapper" id="card-border" key={index}>
+  $('#all-products').append(`<div class="product-wrapper" id="card-border">
   <div class="img-border">
     <img id="product-image" src=${product.image} alt="product-image"/>
     </div>
@@ -211,58 +235,113 @@ allProducts.map((product, index) => {
     <label for="quantity">Cantidad:</label>
     <select name="quantity" class="productQuantity">
     <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
+    <option value="2">2</option> 
+    <option value="3">3</option>   
     <option value="4">4</option>
     </select>
-    <button class="add-to-cart" id="addToCart-btn" onclick="verIdProductSelected(${index})"> Agregar al Carro </button>
+    <button class="add-to-cart" id="listBtn-${product.id}" data-id='${product.id}' value="${product.id}"> Agregar al Carro</button>
     </div>
-</div>`
-  )})
+</div>`)
+})
 
-//Function that gets info from product an user has selected. 
-//It takes what's in index (which is linked to the button)
-//Then search the array of products
-$('#addToCart-btn').append(`<div id="display-cart-screen1'"></div>`)
-let displayCart = $('#display-cart-screen1') 
+$('.add-to-cart').on('click', (e) => {
+  let selectedProductId = e.target.value
+  let productInCart = allProducts.find(p => p.id === parseInt(selectedProductId))
 
-const verIdProductSelected = (key) => {
-  let selectedProduct = allProducts.find((p, index) => index === key)
-  let productName = selectedProduct['productName']
-  let productImage = selectedProduct['image']
-  let productPrice = selectedProduct['price']
+  console.log(selectedProductId)
+  console.log(productInCart)
 
-  addToCart(productName, productImage, productPrice, displayCart)
-  
-} 
+setCartItems(productInCart)
+})
+
+const cartNumbersOnLoad = () => {
+  let numberOfProducts = localStorage.getItem('cartItems')
+  if(numberOfProducts) {
+    $('#nav-product-number').text(numberOfProducts)
+  }
+}
+
+const setCartNumbers = (productInCart) => {
+  let numberOfProducts = localStorage.getItem('cartItems')
+  numberOfProducts = parseInt(numberOfProducts)
+  if (numberOfProducts) {
+    localStorage.setItem('cartItems', numberOfProducts + 1)
+    $('#nav-product-number').text(numberOfProducts + 1)
+  } else {
+    localStorage.setItem('cartItems', 1)
+    $('#nav-product-number').text(numberOfProducts)
+  }
+  setCartItems(productInCart)
+}
+
+const setCartItems = (productInCart) => {
+  let cartItems = localStorage.getItem('productStoredInCart')
+  cartItems = JSON.parse(cartItems)
+  console.log('inside setproduct items', productInCart)
+}
+
+cartNumbersOnLoad()
+
+
+
+
+
+
+
+
+
+
+// function getButtonsId() {
+//   const buttons = [...document.querySelectorAll('.add-to-cart')]
+//   buttons.forEach(button => {
+//     let btnId = button.dataset.id
+//     console.log(btnId)
+//   })
+// }
+// getButtonsId()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //Function that takes selected product and displays it on the screen
-const addToCart = (product, image, price, element3) => {
-  let productListSoFar = document.createElement('div')
-  productListSoFar.innerHTML = 
-  `<div id="card-border">
-  <h2>Tienes<span> x </span>productos en tu carrito</h2>
-  <div class="container" id="cart-list">
-    <div class="row align-items-center">
-      <div class="col">
-        <img id="cart-product-image" src=${image}> </img>
-      </div>
-      <div class="col">
-        ${product}
-      </div>
-      <div class="col">
-        Unidades TODO
-      </div>
-      <div class="col">
-        ${price}
-      </div>
-    </div>
-  </div>
-</div>`
-element3.append(productListSoFar)
+// const addToCart = (product, image, price, element3) => {
+//   let productListSoFar = document.createElement('div')
+//   productListSoFar.innerHTML = 
+//   `<div id="card-border">
+//   <h2>Tienes<span> x </span>productos en tu carrito</h2>
+//   <div class="container" id="cart-list">
+//     <div class="row align-items-center">
+//       <div class="col">
+//         <img id="cart-product-image" src=${image}> </img>
+//       </div>
+//       <div class="col">
+//         ${product}
+//       </div>
+//       <div class="col">
+//         Unidades TODO
+//       </div>
+//       <div class="col">
+//         ${price}
+//       </div>
+//     </div>
+//   </div>
+// </div>`
+// element3.append(productListSoFar)
 
-}
-displayCart.on('change', addToCart)
+// }
+// displayCart.on('change', addToCart)
 
 //Function that creates a element with shipping details
 // const shippingForm = $('#shipping-form')
@@ -324,7 +403,7 @@ displayCart.on('change', addToCart)
 
 //This display the footer
 $('#section-footer').append(`<footer> 
-<p class="footer-message">Contáctanos a traves de nuestras redes sociales</p>
+<p class="footer-message">Contáctanos a través de nuestras redes sociales</p>
 <ul>
     <li><a href="https://www.instagram.com/studio_victor_vera/"><i class="fab fa-instagram fa-2x" style="color: #212529"></i></a></li>
     <li><a href="https://www.facebook.com/victor.j.lopez.359"><i class="fab fa-facebook fa-2x" style="color: #212529"></i></a></li>
