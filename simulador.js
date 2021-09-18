@@ -217,8 +217,6 @@ const formatter = new Intl.NumberFormat('es-CL', {
   })
 
 //Function that maps the product list and then displays them in cards
-const cart = []
-let numberOfProducts = 0;
 
 allProducts.map((product, index) => {
   $('#all-products').append(`<div class="product-wrapper" id="card-border">
@@ -233,13 +231,6 @@ allProducts.map((product, index) => {
       <div id="rating"> 
         <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
       </div>
-    <label for="quantity">Cantidad:</label>
-    <select name="quantity" class="productQuantity" id='product-quantity'>
-    <option value=${product.inCart}>1</option>
-    <option value=${product.inCart}>2</option>
-    <option value=${product.inCart}>3</option>
-    <option value=${product.inCart}>4</option>
-    </select>
     <button class="add-to-cart" id="listBtn-${product.id}" value="${product.id}"> Agregar al Carro</button>
     </div>
 </div>`)
@@ -250,17 +241,14 @@ $('.add-to-cart').on('click', (e) => {
   let product = allProducts.find(p => p.id === parseInt(selectedProductId))
   setCartNumbers(product)
   totalCost(product)
-})
-
-// $('#product-quantity').on('click', (e) => {
-//   let selectedQuantity = e.target.value
-//   console.log(selectedQuantity)
-//   setCartNumbers(product)
-// })
+}
+)
 
 const cartNumbersOnLoad = () => {
   let numberOfProducts = localStorage.getItem('cartNumbers')
-  if(numberOfProducts) {
+  if(!numberOfProducts) {
+    $('#nav-product-number').text(0)
+  } else {
     $('#nav-product-number').text(numberOfProducts)
   }
 }
@@ -309,6 +297,16 @@ if(cartCost != null) {
 }
 }
 
+// const removeProduct = () => {
+//   let CartItems = localStorage.removeItem('productsInCart')
+//   console.log('items local storage before removing', CartItems)
+  
+// }
+
+// const clearAllProducts = () => {
+  
+// }
+
 const displayCart = () => {
 let cartItems = localStorage.getItem('productsInCart')
 let totalCost = localStorage.getItem('totalCost')
@@ -316,9 +314,6 @@ let cartNumbers = localStorage.getItem('cartNumbers')
 cartItems = JSON.parse(cartItems, totalCost, cartNumbers)
 
 console.log(cartItems, totalCost, cartNumbers)
-
-$('#cart-displayed').prepend(`<h2>Tienes <span>${cartNumbers}</span> productos en tu carrito</h2>`)
-
 Object.values(cartItems).map((product, index) => {
 $('#cart-displayed').append(`<div index=${index}>
 <div class="container" id="cart-list">
@@ -330,7 +325,11 @@ $('#cart-displayed').append(`<div index=${index}>
       ${product.productName}
     </div>
     <div class="col">
+      <button type="button" class="btn btn-outline-secondary" value="${product.id}" id="removeItem"><i class="fas fa-minus"></i></button>
+      <span id="cart-product-quantity">
       ${product.inCart}
+      </span>
+      <button type="button" class="btn btn-outline-secondary" value="${product.id}" id="addItem"><i class="fas fa-plus"></i></button>
     </div>
     <div class="col">
     ${formatter.format(product.price)}
@@ -341,6 +340,7 @@ $('#cart-displayed').append(`<div index=${index}>
   </div>
 </div>
 </div>`)
+
 })
 $('#cart-displayed').append(`<div>
 <div class="container" id="cart-list">
@@ -357,47 +357,40 @@ $('#cart-displayed').append(`<div>
     ${formatter.format(totalCost)}
     </div>
     <div class="col">
+    <button type="button" class="btn btn-secondary" id="clear-all">Vaciar el carrito</button>
     </div>
   </div>
 </div>
 </div>`)
+
+if(cartNumbers == null) {
+  $('#cart-displayed').prepend(`<h2>Tu carrito está vacío</h2>`)
+} else {
+  $('#cart-displayed').prepend(`<h2>Tienes <span>${cartNumbers}</span> producto(s) en tu carrito de compras</h2>`)
+}
 }
 
-cartNumbersOnLoad()
+$("#clear-all").on('click', function() {
+localStorage.removeItem('productsInCart')
+localStorage.removeItem('totalCost')
+localStorage.removeItem('cartNumbers')
+window.location.reload();
+})
+
+$("#removeItem").on('click', function() {
+  console.log('btn remove cart item was clicked')
+  })
+
+$("#addItem").on('click', function() {
+    console.log('btn add cart item was clicked')
+    })
+
+cartNumbersOnLoad() 
 displayCart()
 
 // $('#cart-navBar').on('click', displayCart() {
 // $()
 // })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // displayCart.on('change', addToCart)
 
