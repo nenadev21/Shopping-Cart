@@ -30,7 +30,7 @@ let coverNav = `<div class="cover-img">
 </div>
 </nav>
 <button id="more-info-btn" type="button" class="btn btn-dark">Quiero Reservar Mi Hora</button>
-<a id="nav-fixed-whatsapp" href="https://wa.me/56942072788?text=Mandanos%20un%20mensaje%20y%20te%20responderemos%20a%20la%20brevedad"><i class="fab fa-whatsapp fa-2x" style="color: white"></i></a>
+<a id="nav-fixed-whatsapp" href="https://wa.me/18573169455?text=Envíanos%20un%20mensaje%20y%20te%20responderemos%20a%20la%20brevedad"><i class="fab fa-whatsapp fa-2x" style="color: white"></i></a>
 </img>
 </div>`
 $('#navigation').append(coverNav);
@@ -458,7 +458,7 @@ $('#section-footer').append(`<footer>
 <ul>
     <li><a href="https://www.instagram.com/studio_victor_vera/"><i class="fab fa-instagram fa-2x" style="color: #212529"></i></a></li>
     <li><a href="https://www.facebook.com/victor.j.lopez.359"><i class="fab fa-facebook fa-2x" style="color: #212529"></i></a></li>
-    <li><a href="https://wa.me/56942072788?text=Mandanos%20un%20mensaje%20y%20te%20responderemos%20a%20la%20brevedad"><i class="fab fa-whatsapp fa-2x" style="color: #212529"></i></a></li>
+    <li><a href="https://wa.me/18573169455?text=Mandanos%20un%20mensaje%20y%20te%20responderemos%20a%20la%20brevedad"><i class="fab fa-whatsapp fa-2x" style="color: #212529"></i></a></li>
 </ul>
 </footer>`)
 
